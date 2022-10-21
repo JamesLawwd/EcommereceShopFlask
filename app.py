@@ -8,7 +8,7 @@
 
 # Framework ,make development easy, by utilizing reusable code .... , flask, django
 
-from flask import Flask, render_template, sessions, request
+from flask import *
 
 # start
 app = Flask(__name__)
@@ -42,6 +42,14 @@ def index():
 def add():
     cars = ['Mercedes', 'Subaru']
     return cars
+
+
+# css, js, images,boostrap on flask
+# static folder
+
+@app.route('/back')
+def back():
+    return render_template('background.html')
 
 
 app.run(debug=True)
