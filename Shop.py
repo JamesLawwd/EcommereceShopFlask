@@ -7,17 +7,43 @@ import pymysql
 connection = pymysql.connect(host='localhost', user='root', password='', database='EcommerceShopDB')
 print("Database connection successful")
 
-
 # start
 app = Flask(__name__)
-app.secret_key="ILOVEProgramming"
+app.secret_key = "ILOVEProgramming"
 
 
+@app.route('/medicine')
+def medicine():
+    if 'key' in session:
+        cursor_medicine = connection.cursor()
+        sql_medicine = 'SELECT * FROM medicine'
+        cursor_medicine.execute(sql_medicine)
+
+        medicines = cursor_medicine.fetchall()
+
+        return render_template('mymedicine.html', medicines=medicines)
+    else:
+        return redirect('/login')
+
+
+@app.route('/single_item/<medicine_id>')
+def single_item(medicine_id):
+    if 'key' in session:
+
+        cursor = connection.cursor()
+        sql = 'SELECT * FROM medicine WHERE medicine_id=%s'
+        cursor.execute(sql, medicine_id)
+
+        medicine = cursor.fetchone()
+
+        return render_template('single_item.html', medicine=medicine)
+
+    else:
+        return redirect('login.html')
 
 
 @app.route('/')
 def products():
-
     if 'key' in session:
 
         cursor_camera = connection.cursor()
@@ -27,7 +53,7 @@ def products():
         camera = cursor_camera.fetchall()
 
         cursor_watch = connection.cursor()
-        sql_watch ='SELECT * FROM products WHERE product_category="watch" LIMIT 3'
+        sql_watch = 'SELECT * FROM products WHERE product_category="watch" LIMIT 3'
         cursor_watch.execute(sql_watch)
         watch = cursor_watch.fetchall()
 
@@ -36,11 +62,7 @@ def products():
         cursor_shoe.execute(sql_shoe)
         shoe = cursor_shoe.fetchall()
 
-
-
-
-        return render_template('myproducts.html', camera=camera , watch=watch, shoe=shoe)
-
+        return render_template('myproducts.html', camera=camera, watch=watch, shoe=shoe)
 
     else:
         return redirect('/login')
@@ -48,7 +70,7 @@ def products():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    if request.method =='POST':
+    if request.method == 'POST':
         user_email = request.form['email']
         user_password = request.form['pswd']
 
@@ -60,16 +82,13 @@ def login():
             return render_template('login_signup.html', error="Invalid Credential Try Again")
         elif cursor.rowcount == 1:
             row = cursor.fetchone()
-            session['key'] = row[1] # user_name
-            session['email'] = row[2] # Email
+            session['key'] = row[1]  # user_name
+            session['email'] = row[2]  # Email
             return redirect('/')
         else:
             return render_template('login_signup.html', error="Something  wrong with your Credential")
 
-
-
     return render_template('login_signup.html')
-
 
 
 @app.route('/single/<product_id>')
@@ -80,20 +99,18 @@ def single(product_id):
         sql = 'SELECT * FROM products WHERE product_id=%s'
         cursor.execute(sql, (product_id))
 
-
         row = cursor.fetchone()
 
         return render_template('single.html', item_data=row)
 
     else:
-         return redirect('login.html')
+        return redirect('login.html')
 
 
 
 
 
-
-@app.route('/signup', methods=['POST','GET'])
+@app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
 
@@ -110,6 +127,7 @@ def signup():
 
     else:
         return render_template('login_signup.html')
+
 
 @app.route('/logout')
 def logout():
@@ -140,7 +158,6 @@ def mpesa():
         data = r.json()
 
         access_token = "Bearer" + ' ' + data['access_token']
-
 
         #  GETTING THE PASSWORD
         timestamp = datetime.datetime.today().strftime('%Y%m%d%H%M%S')
@@ -181,8 +198,6 @@ def mpesa():
 
     else:
         return render_template('mpesa_payment.html')
-
-
 
 
 app.run(debug=True)
