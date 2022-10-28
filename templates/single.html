@@ -16,7 +16,7 @@
 <div class="container card shadow bg-secondary mt-5">
     <section class="row">
         <div class="col-6  p-5">
-            <a href="/medicine">medicine</a>
+
             <h3 class="text-center">{{item_data[6]}}</h3>
 
             <img src="../static/images/{{item_data[7]}}" alt="" style="border-radius:25px; width:300px; height:500px;" class="img-thumbnail">
@@ -33,7 +33,28 @@
                     <h5> color : {{item_data[8]}}</h5>
 
                     <P class="lead">{{item_data[2]}}</P>
-                    <button type="button" class="btn btn-primary btn-md" style="margin-left:100px; margin-right:100px;" data-bs-toggle="modal" data-bs-target="#payment">Pay Now</button>
+
+                    <legend>
+
+                <section>
+
+                            <form action="/add" method="post" class="form-control col-sm-1" ><br><br><br>   <p class="text-muted">Enter Quantity</p><br>
+                                 <input type="hidden" name="code" value="{{item_data[0]}}"/>
+                                 <input type="number" name="quantity" placeholder="Quantity"  required><br><br>
+                                <h5 class="text-warning">Price :&nbspKSH &nbsp{{item_data[3]}}</h5><br>
+                                 <button type="submit" class="btn btn-danger">ADD TO CART</button>
+                                <br><br>
+
+                                <br>
+                            </form>
+
+                    <br>
+
+                </section>
+       </legend>
+<!--                    <button type="button" class="btn btn-primary btn-md" style="margin-left:100px; margin-right:100px;" data-bs-toggle="modal" data-bs-target="#payment">Pay Now</button>-->
+
+
 
                 </div>
 
@@ -43,43 +64,9 @@
 
     </section>
 
-    <div class="modal fade bg-primarys" id="payment">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center">Pay your product Here</h5>
-                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-
-                </div>
-                <div class="modal-body">
-                    <div class="card shadow p-5 bg-warning">
-                        <form action="/mpesa_payment" method="post">
-                            <input type="tel" name="phone" id="phone" placeholder="Enter your phone no. +2547xxxxxxxx" class="form-control" style="border-radius:20px;"><br>
-                            <input type="number" name="amount" id="amount" placeholder="Enter the Amount" class="form-control" style="border-radius:20px;">
-                            <br>
-<!--                            <a href="/mpesa_payment" class="btn btn-success btn-lg">Pay Via Mpesa</a>-->
-                            <input type="submit" value="Pay via Mpesa" class="btn btn-success btn-lg">
-
-                        </form>
-
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-lg" data-bs-dismiss="modal">Cancel</button>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
 </div>
 
-
+{% include 'footer.html' %}
 </body>
 </html>
 
