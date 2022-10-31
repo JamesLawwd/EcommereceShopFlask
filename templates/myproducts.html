@@ -7,6 +7,8 @@
     <title>Document</title>
 
     <!-- CSS only -->
+     <link rel="stylesheet" href=
+"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- JavaScript Bundle with Popper -->
@@ -33,15 +35,15 @@
     <div class="container bg-secondary">
 
 
-        <h1 class="heading text-info">Knight Shop Online Store <span>Welcome!</span></h1>
+        <h1 class="heading text-dark">Knight Shop Online Store <span>Welcome!</span></h1>
 
          <b>
             <h2>Welcome{{session['key']}} : {{ session['email']}}</h2>
         </b>
         <a href="/medicine" class="btn btn-primary btn-lg ml-1" style="margin-left:10px;">medicine</a>
         <a href="/logout" class="btn btn-danger btn-lg mb-2 mr-1" onclick="logout()">Logout</a>
-        <marquee class="text-white left">Best choice of shopping</marquee>
 
+        <h2><marquee class="left text-lg text-dark bg-secondary"> @Knight;Best choice of shopping</marquee></h2>
         <div class="gallery card shadow bg-secondary p-5 mb-5">
 
 
@@ -65,7 +67,8 @@
 
 
 
-                <a href="/single/{{camera[0]}}" class="btn btn-primary btn-lg">Add to Cart</a>
+                <a href="/single/{{camera[0]}}" class="btn btn-primary btn-lg">View Product</a>
+                <a href="/single/{{camera[0]}}" class="btn btn-success btn-lg">Buy now</a>
 
 
 
@@ -96,12 +99,15 @@
                 <h3>{{x[1]}}</h3>
                <h6> price{{x[3]}} KES</h6>
                 <h6>Discount; {{x[4]}}</h6>
-                <p class="camera">{{x[2]}}</p>
+                <p class="lead">{{x[2]}}</p>
                 <marquee class="left">Best choice of Shopping</marquee>
 
 
 
-                <a href="/single/{{x[0]}}" class="btn btn-primary btn-lg">Add to Cart</a>
+                 <a href="/single/{{x[0]}}" class="btn btn-primary btn-lg">View Product</a>
+                <a href="/single/{{x[0]}}" class="btn btn-success btn-lg">Buy now</a>
+
+
 
 
 
@@ -138,7 +144,8 @@
 
 
 
-                <a href="/single/{{y[0]}}" class="btn btn-primary btn-lg">Add to Cart</a>
+                 <a href="/single/{{y[0]}}" class="btn btn-primary btn-lg">View Product</a>
+                <a href="/single/{{y[0]}}" class="btn btn-success btn-lg">Buy now</a>
 
 
 

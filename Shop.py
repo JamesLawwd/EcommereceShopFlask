@@ -187,7 +187,7 @@ def mpesa():
             "Password": "{}".format(password),
             "Timestamp": "{}".format(timestamp),
             "TransactionType": "CustomerPayBillOnline",
-            "Amount": amount,  # use 1 when testing
+            "Amount": print(int(session['all_total_price'])),  # use 1 when testing
             "PartyA": phone,  # change to your number
             "PartyB": "174379",
             "PhoneNumber": phone,
@@ -274,6 +274,7 @@ def add_product_to_cart():
         # add total quantity and total price to a session
         session['all_total_quantity'] = all_total_quantity
         session['all_total_price'] = all_total_price
+        print(int(session['all_total_price']))
         return redirect(url_for('.cart'))
     else:
         return 'Error while adding item to cart'
@@ -281,7 +282,12 @@ def add_product_to_cart():
 
 @app.route('/cart')
 def cart():
-    return render_template('cart.html')
+    if 'key' in session:
+        return render_template('cart.html')
+    else:
+        return redirect('/login')
+
+
 
 
 @app.route('/customer_checkout')
