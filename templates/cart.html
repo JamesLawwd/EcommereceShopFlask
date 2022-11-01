@@ -86,13 +86,14 @@
                               <div class="modal-dialog">
  <div class="modal-content">
  <div class="modal-header">
- <h5 class="modal-title text-center">Pay your medicine Here</h5>
+ <h5 class="modal-title text-center">Pay your products Here</h5>
  <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
 
  </div>
  <div class="modal-body">
  <div class="card shadow p-5 bg-warning">
  <form action="/mpesa_payment" method="post">
+     <h5>Enter your phone no.to pay {{session['all_total_price']}}</h5>
  <input type="tel" name="phone" id="phone" placeholder="Enter your phone no. +2547xxxxxxxx" class="form-control" style="border-radius:20px;"><br>
  <input type="hidden" name="amount" id="amount" placeholder="Enter the Amount" class="form-control" style="border-radius:20px;">
  <br>
